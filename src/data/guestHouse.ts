@@ -29,7 +29,7 @@ import {
 export const guestHouse = {
   name: 'The Imagination Guest House',
   tagline: 'Wake up to birdsong beneath a thatched roof, and let your imagination wander.',
-  location: 'Irumbai, Auroville, Tamil Nadu',
+  location: 'Near Isaiambalam School, Auroville, Tamil Nadu',
   phone: '+91 95859 42575',
   whatsappUrl:
     'https://wa.me/919585942575?text=Hi!%20I%20am%20interested%20in%20booking%20a%20hut%20at%20The%20Imagination%20Guest%20House.%20Can%20you%20share%20the%20availability%20and%20rates%3F',
