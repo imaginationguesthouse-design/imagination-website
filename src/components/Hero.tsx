@@ -14,7 +14,7 @@ export function Hero() {
 
       <div className="mx-auto w-full max-w-6xl px-4 pb-12 pt-32 sm:px-6 sm:pb-16 sm:pt-36 lg:px-8 lg:pb-24">
         <div className="max-w-3xl animate-fadeUp">
-          <span className="eyebrow !text-brass-300">Thatched roof huts in Irumbai</span>
+          <span className="eyebrow !text-brass-300">Thatched roof huts near Auroville</span>
           <h1 className="mt-6 max-w-full text-[2.8rem] leading-[1.05] text-sand-50 sm:text-7xl lg:text-8xl">
             The Imagination <span className="italic text-brass-300">Guest House</span>
           </h1>
