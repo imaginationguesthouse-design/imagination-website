@@ -52,9 +52,9 @@ type HeroFactProps = {
 
 function HeroFact({ label, value, className = '' }: HeroFactProps) {
   return (
-    <div className={`flex flex-col justify-center gap-1.5 bg-forest-900/40 p-5 sm:p-6 ${className}`}>
+    <div className={`flex flex-col h-full gap-1.5 bg-forest-900/40 p-5 sm:p-6 ${className}`}>
       <dt className="text-[0.68rem] uppercase tracking-[0.24em] text-brass-300">{label}</dt>
-      <dd className="font-display text-2xl text-sand-50 sm:text-3xl">{value}</dd>
+      <dd className="my-auto font-display text-2xl text-sand-50 sm:text-3xl">{value}</dd>
     </div>
   );
 }
