@@ -11,7 +11,7 @@ export function Amenities() {
           description="The essentials that come with your stay, so you can switch off and simply enjoy."
         />
 
-        <ul className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:grid-cols-3 sm:gap-5 lg:grid-cols-6">
+        <ul className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-5 md:grid-cols-4">
           {guestHouse.amenities.map(({ label, icon: Icon }) => (
             <li
               key={label}
