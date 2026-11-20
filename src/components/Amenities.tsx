@@ -15,7 +15,7 @@ export function Amenities() {
           {guestHouse.amenities.map(({ label, icon: Icon }) => (
             <li
               key={label}
-              className="group flex min-w-0 flex-col items-center justify-center text-center gap-4 rounded-3xl border border-forest-800/10 bg-sand-50 p-5 transition duration-500 hover:-translate-y-1 hover:border-brass-500/60 hover:shadow-[0_24px_40px_-24px_rgba(16,35,27,0.45)] sm:gap-5 sm:p-7"
+              className="group flex min-w-0 flex-col items-center justify-center text-center gap-4 rounded-3xl border border-forest-800/10 bg-sand-50 p-5 transition duration-500 hover:-translate-y-1 hover:border-brass-500/60 hover:shadow-[0_24px_40px_-24px_rgba(16,35,27,0.45)] sm:gap-5 sm:p-7"></li>
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-forest-800 text-brass-300 transition duration-500 group-hover:rotate-6 group-hover:bg-brass-500 group-hover:text-forest-900">
                 <Icon className="h-5 w-5" strokeWidth={1.6} />
               </span>
