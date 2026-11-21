@@ -11,31 +11,31 @@ type MaterialCard = {
 
 const CARDS: MaterialCard[] = [
   {
-    title: 'Thatched roof',
-    line: 'A layer of palm leaves topped with thick grass thatch, about half a foot deep, keeps the hut naturally cool under the Tamil sun.',
-    photo: '/thatch.jpg',
-    alt: 'Close-up of palm leaf and grass thatch on a traditional roof',
+    title: 'Double-layered thatched roof',
+    line: 'Built in two layers for naturally cooler temperatures: a woven inner layer of coconut leaves topped with half a foot of thick grass thatch to insulate the hut from the Tamil sun.',
+    photo: '', // Later replace '' with '/your-roof-photo.jpg'
+    alt: 'Double-layered coconut leaf and thick grass thatched roof',
     icon: Home,
   },
   {
-    title: 'Solid brick walls',
-    line: 'Strong brick walls set in a mix of cement and red sand give the hut warmth, strength and an earthy feel.',
-    photo: '/brick.jpg',
-    alt: 'Red brick wall with natural texture',
+    title: 'Compressed earth block walls',
+    line: 'Built with unfired compressed stabilized earth blocks instead of kiln-fired bricks, these eco-friendly walls lower environmental impact while naturally regulating humidity and keeping interiors cool.',
+    photo: '', // Later replace '' with '/your-wall-photo.jpg'
+    alt: 'Compressed stabilized earth block wall with natural earthy texture',
     icon: BrickWall,
   },
   {
-    title: 'Timber beams and frames',
-    line: 'Exposed wooden beams give each hut its warm, grounded character.',
-    photo: '/beams.jpg',
-    alt: 'Rustic wooden beams under a ceiling',
+    title: 'Tree kazhi frame & wooden loft',
+    line: 'Sturdy natural tree poles (kazhi) form the sweeping roof frame overhead, paired with warm solid wood flooring across the upper loft bed area.',
+    photo: '', // Later replace '' with '/your-frame-loft-photo.jpg'
+    alt: 'Natural tree kazhi roof frame and solid wood loft floor',
     icon: TreePine,
   },
   {
     title: 'Natural surroundings',
     line: 'Gardens grow right up to your door, with birdsong in place of traffic.',
-    photo: '/garden.jpg',
-    alt: 'Lush green tropical garden in South India',
+    photo: '', // Later replace '' with '/your-garden-photo.jpg'
+    alt: 'Lush green natural garden surroundings around the eco-friendly huts',
     icon: Palmtree,
   },
 ];
@@ -69,7 +69,7 @@ export function AboutHuts() {
           <span className="eyebrow">The Huts</span>
           <h2 className="text-4xl sm:text-5xl">Built by hand. Rooted in Tamil tradition.</h2>
           <p className="max-w-[680px] text-base leading-[1.5] text-forest-700 sm:text-lg">
-            Our huts are built the way Tamil villages have built homes for generations: a steep thatched roof, thick walls and timber beams, all shaped by hand with ancestral techniques. Nothing here is rushed or mass-made. Every roof line and every doorway was crafted slowly, with respect for the land.
+            Our eco-friendly huts are built the way Tamil villages have crafted sustainable homes for generations: a double-layered thatched roof, compressed earth block walls, and natural wooden frames, all shaped by hand with ancestral techniques. Nothing here is rushed or mass-made—every roof line and every doorway was crafted slowly as an eco-friendly house with respect for the land.
           </p>
         </div>
 
@@ -86,15 +86,24 @@ export function AboutHuts() {
                   key={card.title}
                   className="group relative flex shrink-0 snap-start overflow-hidden rounded-3xl border border-forest-800/10 shadow-[0_20px_50px_-30px_rgba(16,35,27,0.35)] aspect-[4/5] w-[78%] sm:aspect-[3/4] sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
                 >
-                  <img
-                    src={card.photo}
-                    alt={card.alt}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
+                  {card.photo ? (
+                    <img
+                      src={card.photo}
+                      alt={card.alt}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-forest-800 via-forest-900 to-forest-800">
+                      <Icon className="h-24 w-24 text-brass-300/15" strokeWidth={1.1} />
+                      <span className="absolute right-4 top-4 rounded-full border border-sand-200/20 bg-forest-900/60 px-3 py-1 text-xs tracking-wide text-sand-200/80">
+                        Photo coming soon
+                      </span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-forest-900/85 via-forest-900/25 to-forest-900/10" />
                   <div className="absolute inset-0 bg-forest-900/10" />
-                  <div className="relative flex h-full flex-col justify-end p-5 sm:p-6">
+                  <div className="relative flex h-full w-full flex-col justify-end p-5 sm:p-6">
                     <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-brass-500 text-forest-900">
                       <Icon className="h-5 w-5" strokeWidth={1.6} />
                     </span>
@@ -140,7 +149,7 @@ export function AboutHuts() {
 
         <div className="mt-12 flex flex-col items-center gap-6 sm:mt-16">
           <p className="max-w-[680px] text-center text-lg leading-[1.6] text-forest-700 sm:text-xl">
-            Step inside and the air changes. It is cool, quiet and softly lit, with sunlight filtering through the thatch and wooden beams rising above you. Climb to the loft bed beneath its mosquito net, step out onto your private balcony, and let the rustle of leaves and birds replace the noise of the day. It feels less like a hotel room and more like a treehouse built from heritage.
+            Step inside our eco-friendly huts and the air changes. It is cool, quiet and softly lit, with sunlight filtering through the thatch and natural tree-pole frames rising above you. Climb up to the wooden loft bed beneath its mosquito net, step out onto your private balcony, and let the rustle of leaves and birds replace the noise of the day. It feels less like a hotel room and more like an eco-friendly treehouse built from heritage.
           </p>
           <p className="text-center text-lg italic text-brass-700 sm:text-xl">
             Come for the huts. Stay for the stillness.
