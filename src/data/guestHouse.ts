@@ -29,7 +29,7 @@ import {
 export const guestHouse = {
   name: 'The Imagination Guest House',
   tagline: 'Wake up to birdsong beneath a thatched roof, and let your imagination wander.',
-  location: 'Isaiambalam School Road, Alankuppam, Auroville, Puducherry.',
+  location: 'Isaiambalam School Road, Alankuppam, Auroville, Puducherry',
   phone: '+91 95859 42575',
   whatsappUrl:
     'https://wa.me/919585942575?text=Hi!%20I%20am%20interested%20in%20booking%20a%20hut%20at%20The%20Imagination%20Guest%20House.%20Can%20you%20share%20the%20availability%20and%20rates%3F',
@@ -121,40 +121,4 @@ export const guestHouse = {
       title: 'SVARAM Instruments & Research',
       line: 'Watch artisans craft extraordinary musical instruments, right next door to the garden.',
       chip: '4 min from Guest House',
-      hours: 'Mon–Sat 9:30 AM–12:30 PM and 2:30–4:30 PM. Sunday morning only.',
-      icon: Music,
-    },
-    {
-      title: 'The Colours of Nature',
-      line: "Experience Auroville's renowned natural dyeing studio with living indigo vats, 100% plant-based dyes, guided tours, and hands-on workshops.",
-      chip: '5 min from Guest House',
-      hours: 'Mon–Sat 8:30 AM–5:00 PM. Closed Sunday.',
-      icon: Palette,
-    },
-    {
-      title: "Auroville Visitor's Centre",
-      line: 'Taste dishes from different countries at famous cafés like Right Path Café, Dreamer's Café, and La Terrace Café, browse handcrafted boutiques, and discover new Auroville experiences.',
-      chip: '10 min from Guest House',
-      hours: 'Grounds and cafés 8:00 AM–7:30 PM. Boutiques 9:30 AM–5:00 PM.',
-      icon: Store,
-    },
-    {
-      title: 'Naturellement Garden Café',
-      line: 'A quiet, shaded garden café for trying fresh homemade delicacies among the trees.',
-      chip: '8 min from Guest House',
-      hours: 'Tue–Sun 9:00 AM–5:00 PM. Closed Monday.',
-      icon: Utensils,
-    },
-    {
-      title: 'Auroville Beach',
-      line: "A calm, quiet beach for a peaceful walk by the ocean. Go early morning or late afternoon, when it's cooler.",
-      chip: '30 min from Guest House',
-      hours: 'Daily 7:00 AM–6:30 PM.',
-      icon: Waves,
-    },
-  ] satisfies { title: string; line: string; chip: string; hours: string; icon: LucideIcon }[],
-  matrimandir: {
-    url: 'https://mmaccess.auroville.org.in/visitors/new',
-    icon: CalendarHeart,
-  },
-};
+      hours: 'Mon–Sat 9:30 AM–12:30 PM an
