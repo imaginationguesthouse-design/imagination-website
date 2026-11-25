@@ -29,8 +29,8 @@ export function AccessAndStay() {
 
             <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4" aria-label="Shared space photos">
               <img src="/Commomkitchen.jpg" alt="Common kitchen" className="h-24 w-full rounded-xl object-cover sm:h-40" />
-              <img src="/Commondiningtable.jpg" alt="Common dining table" className="h-24 w-full rounded-xl object-cover sm:h-40" />
-              <img src="/Commondiningtable1.jpg" alt="Shared dining area" className="h-24 w-full rounded-xl object-cover sm:h-40" />
+              <img src="/Commondiningtable.jpeg" alt="Common dining table" className="h-24 w-full rounded-xl object-cover sm:h-40" />
+              <img src="/Commondiningtable1.jpeg" alt="Shared dining area" className="h-24 w-full rounded-xl object-cover sm:h-40" />
             </div>
 
             <p className="mt-8 max-w-2xl text-base leading-[1.5] text-forest-700 sm:text-lg">
