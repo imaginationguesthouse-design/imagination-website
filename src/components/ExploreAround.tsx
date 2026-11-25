@@ -12,7 +12,7 @@ export function ExploreAround() {
         <SectionHeading
           eyebrow="Nearby"
           title="Explore around Auroville"
-          description="Quiet gardens, handmade music, good food and a calm beach, all a short ride from your hut. Distances and times are from the guest house by scooter or bike."
+          description="Place to meditate, Sound garden, handmade music, different country food, Auroville bakery, good food and a calm beach, all a short ride from your hut. Distances and times are from the guest house by scooter or bike."
         />
 
         <ul className="mt-10 grid grid-cols-1 gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
@@ -45,9 +45,9 @@ export function ExploreAround() {
                 <MatrimandirIcon className="h-5 w-5" strokeWidth={1.6} />
               </span>
               <div className="flex flex-col gap-1">
-                <h3 className="text-2xl text-forest-900">Planning to visit the Matrimandir Inner Chamber?</h3>
+                <h3 className="text-2xl text-forest-900">Planning to visit the Matrimandir Inner Chamber for meditation?</h3>
                 <p className="text-xs font-medium uppercase tracking-[0.18em] text-brass-700">
-                  Just 5 km (about 14 mins by scooter) from the guesthouse.
+                  Just 2 km (about 10 mins by scooter) from the guesthouse.
                 </p>
               </div>
             </div>
