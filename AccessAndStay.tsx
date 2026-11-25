@@ -1,8 +1,37 @@
-import { LogIn, LogOut, type LucideIcon } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, LogIn, LogOut, X, type LucideIcon } from 'lucide-react';
 import { SectionHeading } from '@/components/SectionHeading';
 import { guestHouse } from '@/data/guestHouse';
 
+const SHARED_PHOTOS = [
+  { src: '/Commomkitchen.jpg', alt: 'Common kitchen' },
+  { src: '/Commondiningtable.jpg', alt: 'Common dining table' },
+  { src: '/commondiningtable1.jpeg', alt: 'Guests enjoying a meal at the common dining table' },
+  { src: '/commondiningtable2.jpeg', alt: 'Family dining together in the shared kitchen area' },
+];
+
 export function AccessAndStay() {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxIndex(null);
+      if (e.key === 'ArrowRight') {
+        setLightboxIndex((prev) => (prev === null ? null : (prev + 1) % SHARED_PHOTOS.length));
+      }
+      if (e.key === 'ArrowLeft') {
+        setLightboxIndex((prev) =>
+          prev === null ? null : (prev - 1 + SHARED_PHOTOS.length) % SHARED_PHOTOS.length
+        );
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex]);
+
+  const activePhoto = lightboxIndex !== null ? SHARED_PHOTOS[lightboxIndex] : null;
+
   return (
     <section id="access" className="scroll-mt-24 overflow-hidden px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
       <div className="mx-auto w-full max-w-6xl">
@@ -27,10 +56,26 @@ export function AccessAndStay() {
               ))}
             </ul>
 
-            <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4" aria-label="Shared space photos">
-              <img src="/Commomkitchen.jpg" alt="Common kitchen" className="h-24 w-full rounded-xl object-cover sm:h-40" />
-              <img src="/Commondiningtable.jpg" alt="Common dining table" className="h-24 w-full rounded-xl object-cover sm:h-40" />
-              <img src="/Commondiningtable1.jpg" alt="Shared dining area" className="h-24 w-full rounded-xl object-cover sm:h-40" />
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4" aria-label="Shared space photos">
+              {SHARED_PHOTOS.map((photo, index) => (
+                <button
+                  key={photo.src}
+                  type="button"
+                  onClick={() => setLightboxIndex(index)}
+                  className="group relative aspect-square w-full overflow-hidden rounded-2xl border border-forest-800/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-500"
+                  aria-label={`View full photo: ${photo.alt}`}
+                >
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-105"
+                  />
+                  <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-900/60 to-transparent px-3 py-2 text-right text-[11px] text-sand-100 opacity-0 transition duration-300 group-hover:opacity-100">
+                    Tap to view
+                  </span>
+                </button>
+              ))}
             </div>
 
             <p className="mt-8 max-w-2xl text-base leading-[1.5] text-forest-700 sm:text-lg">
@@ -64,6 +109,63 @@ export function AccessAndStay() {
           </div>
         </div>
       </div>
+
+      {activePhoto && lightboxIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-forest-900/90 p-4 backdrop-blur-sm"
+          onClick={() => setLightboxIndex(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={activePhoto.alt}
+        >
+          <button
+            type="button"
+            onClick={() => setLightboxIndex(null)}
+            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-forest-800/90 text-sand-50 transition hover:bg-brass-500 hover:text-forest-900"
+            aria-label="Close photo viewer"
+          >
+            <X className="h-5 w-5" strokeWidth={1.8} />
+          </button>
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((lightboxIndex - 1 + SHARED_PHOTOS.length) % SHARED_PHOTOS.length);
+            }}
+            className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-forest-800/90 text-brass-300 transition hover:bg-brass-500 hover:text-forest-900 sm:left-6"
+            aria-label="Previous photo"
+          >
+            <ChevronLeft className="h-5 w-5" strokeWidth={1.8} />
+          </button>
+
+          <div
+            className="relative flex max-h-[85vh] max-w-4xl flex-col items-center gap-3"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={activePhoto.src}
+              alt={activePhoto.alt}
+              className="max-h-[80vh] max-w-full rounded-2xl object-contain shadow-2xl"
+            />
+            <p className="text-xs tracking-wide text-sand-200/90">
+              {lightboxIndex + 1} / {SHARED_PHOTOS.length} — {activePhoto.alt}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((lightboxIndex + 1) % SHARED_PHOTOS.length);
+            }}
+            className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-forest-800/90 text-brass-300 transition hover:bg-brass-500 hover:text-forest-900 sm:right-6"
+            aria-label="Next photo"
+          >
+            <ChevronRight className="h-5 w-5" strokeWidth={1.8} />
+          </button>
+        </div>
+      )}
     </section>
   );
 }
