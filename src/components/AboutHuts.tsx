@@ -1,10 +1,10 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Home, BrickWall, TreePine, Palmtree } from 'lucide-react';
 
 type MaterialCard = {
   title: string;
   line: string;
-  photo: string;
+  photos: string[];
   alt: string;
   icon: typeof Home;
 };
@@ -13,32 +13,113 @@ const CARDS: MaterialCard[] = [
   {
     title: 'Double-layered thatched roof',
     line: 'Built in two layers for naturally cooler temperatures: a woven inner layer of coconut leaves topped with half a foot of thick grass thatch to insulate the hut from the Tamil sun.',
-    photo: '', // Later replace '' with '/your-roof-photo.jpg'
+    photos: ['/roofoutside.jpeg', '/roofinside.jpeg'],
     alt: 'Double-layered coconut leaf and thick grass thatched roof',
     icon: Home,
   },
   {
     title: 'Compressed earth block walls',
     line: 'Built with unfired compressed stabilized earth blocks instead of kiln-fired bricks, these eco-friendly walls lower environmental impact while naturally regulating humidity and keeping interiors cool.',
-    photo: '', // Later replace '' with '/your-wall-photo.jpg'
+    photos: ['/wall.jpeg'],
     alt: 'Compressed stabilized earth block wall with natural earthy texture',
     icon: BrickWall,
   },
   {
     title: 'Tree kazhi frame & wooden loft',
     line: 'Sturdy natural tree poles (kazhi) form the sweeping roof frame overhead, paired with warm solid wood flooring across the upper loft bed area.',
-    photo: '', // Later replace '' with '/your-frame-loft-photo.jpg'
+    photos: ['/kazhiframe.png', '/loft.jpeg'],
     alt: 'Natural tree kazhi roof frame and solid wood loft floor',
     icon: TreePine,
   },
   {
     title: 'Natural surroundings',
     line: 'Gardens grow right up to your door, with birdsong in place of traffic.',
-    photo: '', // Later replace '' with '/your-garden-photo.jpg'
+    photos: ['/surrounding.jpeg'],
     alt: 'Lush green natural garden surroundings around the eco-friendly huts',
     icon: Palmtree,
   },
 ];
+
+function MaterialCardItem({ card }: { card: MaterialCard }) {
+  const Icon = card.icon;
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const hasMultiplePhotos = card.photos.length > 1;
+
+  useEffect(() => {
+    if (!hasMultiplePhotos) return;
+    const timer = window.setTimeout(() => {
+      setPhotoIndex((prev) => (prev + 1) % card.photos.length);
+    }, 4000);
+    return () => window.clearTimeout(timer);
+  }, [hasMultiplePhotos, card.photos.length, photoIndex]);
+
+  const handleCardTap = () => {
+    if (!hasMultiplePhotos) return;
+    setPhotoIndex((prev) => (prev + 1) % card.photos.length);
+  };
+
+  return (
+    <article
+      onClick={handleCardTap}
+      className={`group relative flex shrink-0 snap-start overflow-hidden rounded-3xl border border-forest-800/10 shadow-[0_20px_50px_-30px_rgba(16,35,27,0.35)] aspect-[4/5] w-[78%] sm:aspect-[3/4] sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] ${
+        hasMultiplePhotos ? 'cursor-pointer select-none' : ''
+      }`}
+    >
+      {card.photos.length > 0 ? (
+        card.photos.map((src, idx) => (
+          <img
+            key={src}
+            src={src}
+            alt={card.alt}
+            loading="lazy"
+            className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${
+              idx === photoIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ))
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-forest-800 via-forest-900 to-forest-800">
+          <Icon className="h-24 w-24 text-brass-300/15" strokeWidth={1.1} />
+        </div>
+      )}
+
+      <div className="absolute inset-0 bg-gradient-to-t from-forest-900/85 via-forest-900/25 to-forest-900/10" />
+      <div className="absolute inset-0 bg-forest-900/10" />
+
+      {hasMultiplePhotos && (
+        <div className="absolute right-4 top-4 z-10 flex items-center gap-2 rounded-full border border-sand-200/20 bg-forest-900/65 px-3 py-1.5 backdrop-blur-sm">
+          <span className="text-[11px] font-medium tracking-wide text-sand-100">
+            {photoIndex + 1}/{card.photos.length}
+          </span>
+          <div className="flex items-center gap-1">
+            {card.photos.map((src, idx) => (
+              <button
+                key={src}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPhotoIndex(idx);
+                }}
+                aria-label={`View photo ${idx + 1} of ${card.title}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === photoIndex ? 'w-4 bg-brass-400' : 'w-1.5 bg-sand-200/50 hover:bg-sand-200/80'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="relative flex h-full w-full flex-col justify-end p-5 sm:p-6">
+        <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-brass-500 text-forest-900">
+          <Icon className="h-5 w-5" strokeWidth={1.6} />
+        </span>
+        <h3 className="text-xl text-sand-50 sm:text-2xl">{card.title}</h3>
+        <p className="mt-2 text-sm leading-[1.5] text-sand-200/90">{card.line}</p>
+      </div>
+    </article>
+  );
+}
 
 export function AboutHuts() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -79,46 +160,16 @@ export function AboutHuts() {
             onScroll={handleScroll}
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-5"
           >
-            {CARDS.map((card) => {
-              const Icon = card.icon;
-              return (
-                <article
-                  key={card.title}
-                  className="group relative flex shrink-0 snap-start overflow-hidden rounded-3xl border border-forest-800/10 shadow-[0_20px_50px_-30px_rgba(16,35,27,0.35)] aspect-[4/5] w-[78%] sm:aspect-[3/4] sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
-                >
-                  {card.photo ? (
-                    <img
-                      src={card.photo}
-                      alt={card.alt}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-forest-800 via-forest-900 to-forest-800">
-                      <Icon className="h-24 w-24 text-brass-300/15" strokeWidth={1.1} />
-                      <span className="absolute right-4 top-4 rounded-full border border-sand-200/20 bg-forest-900/60 px-3 py-1 text-xs tracking-wide text-sand-200/80">
-                        Photo coming soon
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-forest-900/85 via-forest-900/25 to-forest-900/10" />
-                  <div className="absolute inset-0 bg-forest-900/10" />
-                  <div className="relative flex h-full w-full flex-col justify-end p-5 sm:p-6">
-                    <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-brass-500 text-forest-900">
-                      <Icon className="h-5 w-5" strokeWidth={1.6} />
-                    </span>
-                    <h3 className="text-xl text-sand-50 sm:text-2xl">{card.title}</h3>
-                    <p className="mt-2 text-sm leading-[1.5] text-sand-200/90">{card.line}</p>
-                  </div>
-                </article>
-              );
-            })}
+            {CARDS.map((card) => (
+              <MaterialCardItem key={card.title} card={card} />
+            ))}
           </div>
 
+          {/* Desktop/laptop side arrows only */}
           <button
             type="button"
             onClick={() => scrollToIndex(activeIndex - 1)}
-            className="absolute left-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-forest-800 text-brass-300 shadow-lg transition hover:bg-brass-500 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-300"
+            className="absolute left-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-forest-800 text-brass-300 shadow-lg transition hover:bg-brass-500 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-300 md:flex"
             aria-label="Previous card"
           >
             <ChevronLeft className="h-5 w-5" strokeWidth={1.6} />
@@ -126,25 +177,46 @@ export function AboutHuts() {
           <button
             type="button"
             onClick={() => scrollToIndex(activeIndex + 1)}
-            className="absolute right-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-forest-800 text-brass-300 shadow-lg transition hover:bg-brass-500 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-300"
+            className="absolute right-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-forest-800 text-brass-300 shadow-lg transition hover:bg-brass-500 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-300 md:flex"
             aria-label="Next card"
           >
             <ChevronRight className="h-5 w-5" strokeWidth={1.6} />
           </button>
         </div>
 
-        <div className="mt-5 flex items-center justify-center gap-2">
-          {CARDS.map((card, i) => (
-            <button
-              key={card.title}
-              type="button"
-              onClick={() => scrollToIndex(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === activeIndex ? 'w-7 bg-brass-400' : 'w-1.5 bg-forest-800/20 hover:bg-forest-800/40'
-              }`}
-              aria-label={`Go to ${card.title}`}
-            />
-          ))}
+        {/* Dots + mobile-only arrows below the cards */}
+        <div className="mt-5 flex items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={() => scrollToIndex(activeIndex - 1)}
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-forest-800 text-brass-300 shadow transition hover:bg-brass-500 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-300 md:hidden"
+            aria-label="Previous card"
+          >
+            <ChevronLeft className="h-4 w-4" strokeWidth={1.8} />
+          </button>
+
+          <div className="flex items-center justify-center gap-2">
+            {CARDS.map((card, i) => (
+              <button
+                key={card.title}
+                type="button"
+                onClick={() => scrollToIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === activeIndex ? 'w-7 bg-brass-400' : 'w-1.5 bg-forest-800/20 hover:bg-forest-800/40'
+                }`}
+                aria-label={`Go to ${card.title}`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => scrollToIndex(activeIndex + 1)}
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-forest-800 text-brass-300 shadow transition hover:bg-brass-500 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass-300 md:hidden"
+            aria-label="Next card"
+          >
+            <ChevronRight className="h-4 w-4" strokeWidth={1.8} />
+          </button>
         </div>
 
         <div className="mt-12 flex flex-col items-center gap-6 sm:mt-16">
