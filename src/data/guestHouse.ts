@@ -106,7 +106,7 @@ export const guestHouse = {
     {
       title: 'Matrimandir',
       line: 'The iconic golden meditation dome at the heart of Auroville—a peaceful, one-of-a-kind experience surrounded by serene gardens.',
-      chip: '2.5 km from Guest House',
+      chip: '2 km from Guest House',
       hours: 'Viewing Point daily 9:00 AM–5:00 PM. Inner Chamber requires advance booking.',
       icon: Sparkles,
     },
@@ -133,8 +133,8 @@ export const guestHouse = {
     },
     {
       title: "Auroville Visitor's Centre",
-      line: 'Taste dishes from different countries at the open cafés, browse handcrafted boutiques, and discover new Auroville experiences.',
-      chip: '6 min from Guest House',
+      line: 'Taste dishes from different countries at famous cafés like Right Path Café, Dreamer's Café, and La Terrace Café, browse handcrafted boutiques, and discover new Auroville experiences.',
+      chip: '10 min from Guest House',
       hours: 'Grounds and cafés 8:00 AM–7:30 PM. Boutiques 9:30 AM–5:00 PM.',
       icon: Store,
     },
@@ -148,7 +148,7 @@ export const guestHouse = {
     {
       title: 'Auroville Beach',
       line: "A calm, quiet beach for a peaceful walk by the ocean. Go early morning or late afternoon, when it's cooler.",
-      chip: '15 min from Guest House',
+      chip: '30 min from Guest House',
       hours: 'Daily 7:00 AM–6:30 PM.',
       icon: Waves,
     },
