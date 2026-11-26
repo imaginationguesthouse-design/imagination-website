@@ -12,7 +12,7 @@ export function ExploreAround() {
         <SectionHeading
           eyebrow="Nearby"
           title="Explore around Auroville"
-          description="Place to meditate, Sound garden, handmade music, different countries foods, Auroville bakery, good food and a calm beach, all a short ride from your hut. Distances and times are from the guest house by scooter or bike."
+          description="Place to meditate, Sound garden, handmade music, different countries foods, Auroville bakery and calm beach, all a short ride from your hut. Distances and times are from the guest house by scooter or bike."
         />
 
         <ul className="mt-10 grid grid-cols-1 gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
