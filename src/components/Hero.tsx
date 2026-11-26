@@ -15,8 +15,27 @@ export function Hero() {
       <div className="mx-auto w-full max-w-6xl px-4 pb-12 pt-32 sm:px-6 sm:pb-16 sm:pt-36 lg:px-8 lg:pb-24">
         <div className="max-w-3xl animate-fadeUp">
           <span className="eyebrow !text-brass-300">Thatched roof huts near Auroville</span>
-          <h1 className="mt-6 max-w-full text-[2.8rem] leading-[1.05] text-sand-50 sm:text-7xl lg:text-8xl">
-            The Imagination <span className="italic text-brass-300">Guest House</span>
+          <h1 className="mt-6 max-w-full text-[2.25rem] leading-[1.05] text-sand-50 sm:text-6xl lg:text-7xl">
+            <span className="inline-flex flex-col items-start">
+              <span
+                className="text-[0.34em] leading-none tracking-wide text-sand-50"
+                style={{ fontFamily: "'Koblenz Pro', sans-serif" }}
+              >
+                The
+              </span>
+              <span
+                className="leading-[0.95] tracking-wide text-sand-50"
+                style={{ fontFamily: "'Koblenz Pro', sans-serif" }}
+              >
+                iMAGiNATiON
+              </span>
+              <span
+                className="mt-1 self-center text-[0.65em] font-normal leading-tight text-brass-300"
+                style={{ fontFamily: "'Zecfulmatos', cursive" }}
+              >
+                Guest House
+              </span>
+            </span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-[1.5] text-sand-200 sm:text-lg">
             {guestHouse.tagline}
